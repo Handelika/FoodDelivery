@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.FoodDelivery" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimaryGray</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantGray</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorSecondaryYellow</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantYellow</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/colorPrimaryVariantGray</item>
+        <!-- Customize your theme here. -->
+        <item name="toolbarStyle">@style/Widget.App.MaterialToolbar</item>
+
+    </style>
+
+</resources>

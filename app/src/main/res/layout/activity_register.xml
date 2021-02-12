@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainLinear"
+    tools:context=".RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvLogo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="50dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/burger_logo" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txtMainHeader"
+                style="@style/TextViewMainHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cvLogo"
+                android:text="Burger's Restoran"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtSubHeader"
+                style="@style/TextViewSubHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtMainHeader"
+                android:textAlignment="center"
+                android:text="Acıkınca yanınızda"
+                android:textColor="@color/white" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvUser"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/txtSubHeader"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="50dp"
+                app:cardCornerRadius="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:hint="Kullanıcı Adı"
+                    android:inputType="textEmailAddress"
+                    android:focusable="true"
+                    android:nextFocusDown="@id/txtPass"
+                    android:padding="3dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPass"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/cvUser"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp">
+
+                <EditText
+                    android:id="@+id/txtPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:focusable="true"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@id/txtPassVerify"
+                    android:hint="Parola"
+                    android:padding="3dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPassVerify"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/cvPass"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp">
+
+                <EditText
+                    android:id="@+id/txtPassVerify"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:focusable="true"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@id/btnLogin"
+                    android:hint="Parola Tekrar"
+                    android:padding="3dp" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cvPassVerify"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="25dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingHorizontal="15dp"
+                android:text="ÜYE OL"
+                android:textColor="@color/colorPrimaryGray"
+                app:backgroundTint="@color/white" />
+
+            <TextView
+                android:id="@+id/txtLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnLogin"
+                android:padding="15dp"
+                android:onClick="txtLoginClick"
+                android:text="@string/textAlreadyRegistered"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

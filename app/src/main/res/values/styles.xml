@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="TextViewMainHeader" parent="Widget.AppCompat.TextView">
+        <item name="android:padding">15dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="TextViewSubHeader" parent="Widget.AppCompat.TextView">
+        <item name="android:padding">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MaterialTheme.App." parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/colorOnPrimaryGray</item>
+        <item name="colorPrimary">@color/colorPrimaryGray</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantGray</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryGray</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariantGray</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="contentScrim">@color/colorOnPrimaryGray</item>
+        <item name="scrimBackground">@color/colorOnPrimaryGray</item>
+        <item name="statusBarScrim">@color/colorOnPrimaryGray</item>
+    </style>
+
+    <style name="Widget.App.MaterialToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="toolbarStyle">@style/ThemeOverlay.App.Toolbar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="colorPrimary">@color/colorPrimaryGray</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantGray</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="iconTint">?attr/colorOnPrimary</item>
+        <item name="android:background">@color/colorPrimaryGray</item>
+        <item name="contentScrim">@color/colorOnPrimaryGray</item>
+        <item name="scrimBackground">@color/colorOnPrimaryGray</item>
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="android:titleTextColor" tools:targetApi="m">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="FullScreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+</resources>

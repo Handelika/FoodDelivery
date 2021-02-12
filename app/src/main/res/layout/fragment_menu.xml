@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blackboard"
+    tools:context=".ui.MenuFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        app:elevation="0dp"
+        android:clipToPadding="true"
+        android:background="@color/colorTransparent"
+        app:liftOnScroll="true">
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            app:collapsedTitleTextAppearance="@style/CollapsedToolBar"
+            app:expandedTitleMarginBottom="28dp"
+            app:expandedTitleMarginStart="72dp"
+            android:elevation="0dp"
+            app:expandedTitleTextAppearance="@style/ExpandedToolBar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:elevation="0dp"
+                android:gravity="center_vertical"
+                android:paddingTop="10dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+               >
+
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <ImageView
+                    android:id="@+id/imgLogo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/burger_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_toEndOf="@id/imgLogo"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:id="@+id/imgCart"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/ic_baseline_shopping_cart_24" />
+            </RelativeLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMenuDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlackTrans"
+        android:paddingTop="15dp"
+        android:translationZ="15dp"
+        android:visibility="gone">
+
+
+
+            <LinearLayout
+                android:id="@+id/linearMenuDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgClose"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="end"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_baseline_close_24"
+                    app:tint="@color/white" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:translationZ="25dp"
+                    app:cardCornerRadius="10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/item_border"
+                        android:backgroundTint="@color/white"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imgMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/burger_logo" />
+
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-100dp"
+                    app:cardBackgroundColor="@color/colorTransparent"
+                    android:translationZ="15dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="25dp"
+                        android:background="@drawable/menu_backgorund"
+                        android:paddingTop="115dp"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/txtMenuHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:hint="Klasik Burger"
+                            android:maxLines="1"
+                            android:padding="15dp"
+                            android:textColor="@color/colorPrimaryVariantGray"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtMenuDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:hint="Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez"
+                            android:maxLines="2"
+                            android:textColor="@color/colorPrimaryGray"
+                            android:textSize="16sp" />
+
+
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fillViewport="true"
+                            android:fitsSystemWindows="true"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="15dp">
+
+                                    <ImageView
+                                        android:id="@+id/imgMinus"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_margin="5dp"
+                                        android:background="@color/colorGrayLight"
+                                        android:src="@drawable/ic_baseline_minus_24" />
+
+                                    <EditText
+                                        android:id="@+id/txtTotal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toRightOf="@id/imgMinus"
+                                        android:backgroundTint="@color/colorTransparent"
+                                        android:hint="0"
+                                        android:padding="5dp" />
+
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_margin="5dp"
+                                        android:layout_toRightOf="@id/txtTotal"
+                                        android:background="@color/colorGrayLight"
+                                        android:src="@drawable/ic_baseline_add_24" />
+
+                                    <TextView
+                                        android:id="@+id/txtPrice"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_margin="5dp"
+                                        android:text="25.00 ₺"
+                                        android:textColor="@color/colorGreen"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginVertical="5dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:background="@drawable/item_border">
+
+                                <TextView
+                                    android:id="@+id/txtExtractHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingStart="10dp"
+                                    android:text="Çıkarılacak Malzemeler"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toStartOf="@id/imgDrop"
+                                    android:text="0 Malzeme"
+                                    android:textSize="13sp" />
+
+                                <ImageView
+                                    android:id="@+id/imgDrop"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_arrow_down_24" />
+
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:background="@drawable/item_border">
+
+                                <TextView
+                                    android:id="@+id/txtMeatballHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingStart="10dp"
+                                    android:text="Köfte Seçimi"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toStartOf="@id/imgDrop2"
+                                    android:text="Seçiniz"
+                                    android:textSize="13sp" />
+
+                                <ImageView
+                                    android:id="@+id/imgDrop2"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_arrow_down_24" />
+
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:background="@drawable/item_border">
+
+                                <TextView
+                                    android:id="@+id/txtCheddarHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingStart="10dp"
+                                    android:text="Ekstra Cheddar Peyniri"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toStartOf="@id/imgDrop3"
+                                    android:text="Seçiniz"
+                                    android:textSize="13sp" />
+
+                                <ImageView
+                                    android:id="@+id/imgDrop3"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_arrow_down_24" />
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:background="@drawable/item_border">
+
+                                <TextView
+                                    android:id="@+id/txtDrinkHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingStart="10dp"
+                                    android:text="İçecek Seçimi"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toStartOf="@id/imgDrop4"
+                                    android:text="Seçiniz"
+                                    android:textSize="13sp" />
+
+                                <ImageView
+                                    android:id="@+id/imgDrop4"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_arrow_down_24" />
+
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/item_border">
+
+                                <TextView
+                                    android:id="@+id/txtAdditionalsHeader"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginBottom="15dp"
+                                    android:paddingStart="10dp"
+                                    android:text="Ek Ürünler"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:id="@+id/checkKetchup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtAdditionalsHeader"
+                                    android:enabled="true"
+                                    android:text="Ketçap" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:id="@+id/checkMyoniese"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/checkKetchup"
+                                    android:enabled="true"
+                                    android:text="Mayonez" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:id="@+id/checkGarlicSouce"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/checkMyoniese"
+                                    android:enabled="true"
+                                    android:text="Sarımsaklı Sos" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:id="@+id/checkBarbequeSouce"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/checkGarlicSouce"
+                                    android:enabled="true"
+                                    android:text="BBQ Sos" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:id="@+id/checkLemon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/checkBarbequeSouce"
+                                    android:enabled="true"
+                                    android:text="Limon" />
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddToCart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="SEPETE EKLE" />
+
+                            </LinearLayout>
+
+
+                        </ScrollView>
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeExtractedSupplies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        android:paddingBottom="-5dp"
+        android:translationZ="24dp"
+        android:visibility="gone">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            app:cardBackgroundColor="@color/colorTransparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/menu_backgorund">
+
+                <TextView
+                    android:id="@+id/txtExtractHeader2"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:padding="15dp"
+                    android:text="Çıkarılacak Malzemeler" />
+
+                <TextView
+                    android:id="@+id/txtOk"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="15dp"
+                    android:text="Tamam" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkKetchupExtract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtExtractHeader2"
+                    android:enabled="true"
+                    android:padding="5dp"
+                    android:text="Ketçap" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkMayonieseExtract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkKetchupExtract"
+                    android:enabled="true"
+                    android:padding="5dp"
+                    android:text="Mayonez" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkLettuceExtract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkMayonieseExtract"
+                    android:enabled="true"
+                    android:padding="5dp"
+                    android:text="Marul" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBarbequeExtract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkLettuceExtract"
+                    android:enabled="true"
+                    android:padding="5dp"
+                    android:text="BBQ Sos" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkOnionRingsExtract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBarbequeExtract"
+                    android:enabled="true"
+                    android:padding="5dp"
+                    android:text="Soğan Halkası" />
+
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeMeetballSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        android:translationZ="26dp"
+        android:visibility="gone">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardBackgroundColor="@color/colorTransparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_backgorund">
+
+                <TextView
+                    android:id="@+id/txtMeatballHeader2"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:padding="15dp"
+                    android:text="Köfte Seçimi"
+                    android:textColor="@color/colorPrimaryGray" />
+
+                <TextView
+                    android:id="@+id/txtOkMeetBall"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="15dp"
+                    android:text="Tamam" />
+
+                <NumberPicker
+                    android:id="@+id/pickerMeetball"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/txtMeatballHeader2"
+                    android:layout_centerInParent="true"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:paddingBottom="25dp"
+                    android:pointerIcon="arrow"
+                    tools:targetApi="n" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeCheddarSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        android:translationZ="26dp"
+        android:visibility="gone">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardBackgroundColor="@color/colorTransparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_backgorund">
+
+                <TextView
+                    android:id="@+id/txtCheddarHeader2"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:padding="15dp"
+                    android:text="Ekstra Cheddar Peyniri"
+                    android:textColor="@color/colorPrimaryGray" />
+
+                <TextView
+                    android:id="@+id/txtOkCheddar"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="15dp"
+                    android:text="Tamam" />
+
+                <NumberPicker
+                    android:id="@+id/pickerCheddar"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/txtCheddarHeader2"
+                    android:layout_centerInParent="true"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:paddingBottom="25dp"
+                    android:pointerIcon="arrow"
+                    tools:targetApi="n" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeDrinkSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        android:translationZ="26dp"
+        android:visibility="gone">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardBackgroundColor="@color/colorTransparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_backgorund">
+
+                <TextView
+                    android:id="@+id/txtDrinkHeader2"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:padding="15dp"
+                    android:text="İçecek Seçimi"
+                    android:textColor="@color/colorPrimaryGray" />
+
+                <TextView
+                    android:id="@+id/txtOkDrink"
+                    style="@style/TextViewSubHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="15dp"
+                    android:text="Tamam" />
+
+                <NumberPicker
+                    android:id="@+id/pickerDrink"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/txtDrinkHeader2"
+                    android:layout_centerInParent="true"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:paddingBottom="25dp" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="75dp"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.amar.library.ui.StickyScrollView
+                android:id="@+id/stickyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:stickyHeader="@id/stickyHeader">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:id="@+id/stickyHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cvProductHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardBackgroundColor="@color/colorTransparent"
+                            app:cardElevation="0dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toLeftOf="@id/txtStickyMenuHeader"
+                                    android:src="@drawable/ic_star_fireworks" />
+
+                                <TextView
+                                    android:id="@+id/txtStickyMenuHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="@font/noteworthy_bold"
+                                    android:padding="15dp"
+                                    android:text="Yeni Ürünler"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="30sp"
+                                    tools:ignore="RtlCompat" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toEndOf="@id/txtStickyMenuHeader"
+                                    android:src="@drawable/ic_star_fireworks" />
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+
+            </com.amar.library.ui.StickyScrollView>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

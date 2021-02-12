@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/colorTransparent"
+    app:cardElevation="0dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvMenuImg"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            app:cardUseCompatPadding="true"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imgMenu"
+                android:scaleType="fitXY"
+                />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_toRightOf="@id/cvMenuImg"
+            android:layout_centerVertical="true"
+            >
+
+        <TextView
+            android:id="@+id/txtMenuHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingVertical="2dp"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/noteworthy_bold"
+            android:hint="deneme"
+            android:textColor="@color/colorGrayLight"
+            />
+
+
+        <TextView
+            android:id="@+id/txtMenuDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMenuHeader"
+            android:paddingVertical="1dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="30dp"
+            android:maxLines="2"
+            android:textSize="13sp"
+            android:fontFamily="@font/noteworthy"
+            android:hint="deneme"
+            android:textColor="@color/colorGrayLight"
+            />
+
+
+        <TextView
+            android:id="@+id/txtMenuPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMenuDetail"
+            android:padding="5dp"
+            android:hint="18.95₺"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorGreen"
+            />
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/square"
+            android:backgroundTint="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@id/txtMenuPrice"
+            android:layout_margin="15dp"
+            />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

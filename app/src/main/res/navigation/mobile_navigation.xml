@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_menu">
+
+    <fragment
+        android:id="@+id/navigation_menu"
+        android:name="com.handelika.fooddelivery.ui.MenuFragment"
+        android:label=""
+        tools:layout="@layout/fragment_menu" />
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.handelika.fooddelivery.ui.CartFragment"
+        android:label="Sepetim"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/navigation_firm"
+        android:name="com.handelika.fooddelivery.ui.FirmFragment"
+        tools:layout="@layout/fragment_firm" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.handelika.fooddelivery.ui.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_add_address"
+        android:name="com.handelika.fooddelivery.ui.profileFrags.AddAddressFragment"
+        android:label="@string/title_add_address"
+        tools:layout="@layout/fragment_add_address" >
+        <action
+            android:id="@+id/action_navigation_add_address_to_navigation_profile"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/navigation_profile" />
+    </fragment>
+</navigation>
