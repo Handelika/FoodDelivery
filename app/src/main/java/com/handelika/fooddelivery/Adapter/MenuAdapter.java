@@ -2,9 +2,7 @@ package com.handelika.fooddelivery.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.handelika.fooddelivery.Models.Menu;
 import com.handelika.fooddelivery.R;
+import com.handelika.fooddelivery.callClass.ThemeColors;
 
 import java.util.List;
-
-import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuAdapterViewHolder> {
 
@@ -56,7 +52,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuAdapterVie
         holder.txtMenuDetail.setText(menu.getMenuDetail());
         holder.txtMenuPrice.setText(menu.getMenuPrice());
 
-        int color = Color.parseColor( getShareDefaults("themeColor", context));
+        int color = ThemeColors.getThemeColor(context);
 
         @SuppressLint("UseCompatLoadingForDrawables") Drawable add = context.getResources().getDrawable( R.drawable.ic_baseline_add_24 );
         add.setTint(color);

@@ -1,7 +1,7 @@
 package com.handelika.fooddelivery.callClass;
 
 public class TextClean {
-    public String Temizle(String metin)
+    public static String Temizle(String metin)
     {
         String ifade = metin;
 

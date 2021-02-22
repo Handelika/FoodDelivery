@@ -14,17 +14,12 @@
     <string name="title_call">Ara</string>
 
     <string name="deneme">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices a enim quis tincidunt. Curabitur sed nunc sagittis, egestas arcu at, facilisis libero. Fusce id semper lectus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi non mi tincidunt, tincidunt massa id, hendrerit orci. Donec venenatis tortor eget leo vehicula, sit amet sollicitudin felis placerat. Mauris vulputate sem at cursus sagittis. Nullam lacus mi, vulputate sed finibus sit amet, tristique ut nisi. Donec vestibulum laoreet semper. Donec interdum ultrices risus vel interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc iaculis finibus fermentum.
 
+    </string>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices a enim quis tincidunt. Curabitur sed nunc sagittis, egestas arcu at, facilisis libero. Fusce id semper lectus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi non mi tincidunt, tincidunt massa id, hendrerit orci. Donec venenatis tortor eget leo vehicula, sit amet sollicitudin felis placerat. Mauris vulputate sem at cursus sagittis. Nullam lacus mi, vulputate sed finibus sit amet, tristique ut nisi. Donec vestibulum laoreet semper. Donec interdum ultrices risus vel interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc iaculis finibus fermentum.
-
-Nulla facilisi. Etiam eleifend aliquam mi in finibus. Suspendisse aliquet commodo metus nec placerat. Morbi viverra, enim vel posuere viverra, libero elit bibendum nisl, quis blandit metus ligula id velit. Suspendisse potenti. Integer ut nisi ac justo tempor auctor sed a diam. Sed vestibulum nulla vitae laoreet molestie. In sodales eros tortor, sit amet aliquet turpis pulvinar et. In metus orci, semper et arcu quis, venenatis mollis dolor. Nulla fermentum est quam, quis pharetra felis placerat quis.
-
-Maecenas fermentum pellentesque libero at pretium. Ut a justo porta, commodo urna eu, lobortis enim. Vivamus pellentesque dictum est, ac elementum ante vestibulum et. Proin mauris quam, varius non enim sodales, euismod interdum lorem. Curabitur velit ligula, laoreet at suscipit posuere, finibus eu tellus. Aliquam mauris urna, fringilla a ante in, luctus gravida ex. Phasellus auctor euismod nisi eu eleifend. Pellentesque vel fringilla nisi. Fusce venenatis nulla ut quam convallis maximus. Etiam pharetra diam eleifend sagittis ullamcorper. Suspendisse iaculis suscipit lacus quis pellentesque.
-
-Curabitur vitae purus ante. Ut porta ultricies erat, et vestibulum metus ultricies ut. Integer eget congue nunc, sit amet dapibus odio. Aenean sit amet mattis arcu. Phasellus rhoncus enim sit amet turpis faucibus, faucibus fermentum leo euismod. Maecenas nec mi mattis, volutpat sem nec, lacinia felis. Phasellus dui nibh, volutpat et sollicitudin et, convallis eget urna. Quisque ultricies sapien erat, vel hendrerit elit mollis at. Morbi nec lectus egestas, finibus urna sit amet, consectetur nulla. Sed ut tincidunt turpis. Pellentesque metus nisi, porta vel ornare id, fringilla nec orci. Nullam faucibus eros a purus ultrices consequat. Curabitur in nulla et lorem eleifend auctor. Maecenas in pharetra nibh, ut luctus nibh.
-
-Quisque euismod mi ut ipsum maximus ornare. Donec pulvinar tellus tristique, hendrerit quam at, dignissim ipsum. Integer sed erat et erat efficitur facilisis ut sed nisi. Curabitur ligula neque, blandit sed aliquam pretium, facilisis nec risus. Sed imperdiet urna at lectus tincidunt, ut finibus lorem ullamcorper. Integer vulputate id lectus eu pulvinar. Curabitur facilisis consequat lorem at sodales.
+    <string name="deneme2">
+        Nulla facilisi. Etiam eleifend aliquam mi in finibus. Suspendisse aliquet commodo metus nec placerat. Morbi viverra, enim vel posuere viverra, libero elit bibendum nisl, quis blandit metus ligula id velit. Suspendisse potenti. Integer ut nisi ac justo tempor auctor sed a diam. Sed vestibulum nulla vitae laoreet molestie. In sodales eros tortor, sit amet aliquet turpis pulvinar et. In metus orci, semper et arcu quis, venenatis mollis dolor. Nulla fermentum est quam, quis pharetra felis placerat quis.
     </string>
 
 

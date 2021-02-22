@@ -2,9 +2,7 @@ package com.handelika.fooddelivery.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.handelika.fooddelivery.Models.UserAddress;
 import com.handelika.fooddelivery.R;
+import com.handelika.fooddelivery.callClass.ThemeColors;
 
 import java.util.List;
-
-import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
 
 public class UserAddressAdapter extends RecyclerView.Adapter<UserAddressAdapter.UserAddressAdapterViewHolder> {
 
@@ -52,7 +48,7 @@ public class UserAddressAdapter extends RecyclerView.Adapter<UserAddressAdapter.
 
         UserAddress userAddress = userAddressList.get(position);
 
-        int color = Color.parseColor( getShareDefaults("themeColor", context));
+        int color = ThemeColors.getThemeColor(context);
 
         holder.txtAddressHeader.setText(userAddress.getAddressHeader());
         holder.txtAddressDetail.setText(userAddress.getAddressDetail());
@@ -91,30 +87,4 @@ public class UserAddressAdapter extends RecyclerView.Adapter<UserAddressAdapter.
 
         }
     }
-
-    //region gradientColor
-    private GradientDrawable gradientBackground(int color) {
-        GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
-        gd.setCornerRadius(0f);
-
-        return gd;
-    }
-
-    private int gradientColor(int color, float factor) {
-
-        int a = Color.alpha(color);
-        int r = Math.round(Color.red(color) * factor);
-        int g = Math.round(Color.green(color) * factor);
-        int b = Math.round(Color.blue(color) * factor);
-
-
-        return Color.argb(a,
-                Math.min(r,255),
-                Math.min(g,255),
-                Math.min(b,255));
-    }
-    //endregion
-
 }

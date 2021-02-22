@@ -1,32 +1,26 @@
 package com.handelika.fooddelivery.ui;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.handelika.fooddelivery.Adapter.ProfileTabViewAdapter;
 import com.handelika.fooddelivery.R;
+import com.handelika.fooddelivery.callClass.ThemeColors;
 import com.handelika.fooddelivery.ui.profileFrags.AddressFragment;
 import com.handelika.fooddelivery.ui.profileFrags.PreviousOrdersFragment;
 
-import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
+import static com.handelika.fooddelivery.callClass.ThemeColors.gradientColor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,8 +44,6 @@ public class ProfileFragment extends Fragment {
     //This is our viewPager
     private ViewPager viewPager;
     private ProfileTabViewAdapter adapter;
-
-    private int color;
 
     private TextView txtEditProfile;
 
@@ -106,8 +98,7 @@ public class ProfileFragment extends Fragment {
         viewPager = view.findViewById(R.id.pager);
 
         //theme customization
-        color = Color.parseColor( getShareDefaults("themeColor", context));
-        customizeTheme(color);
+        customizeTheme();
 
 
         getTabs();
@@ -149,7 +140,9 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void customizeTheme(int color) {
+    private void customizeTheme() {
+
+        int color = ThemeColors.getThemeColor(context);
 
         tabLayout.setTabTextColors(gradientColor(color, 1f), Color.WHITE);
         //tabLayout.setBackground(gradientBackground(color));
@@ -160,7 +153,7 @@ public class ProfileFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tab.view.setBackground(gradientBackground(color));
+                tab.view.setBackground(ThemeColors.gradientBackgroundBottom(context));
 
             }
 
@@ -175,38 +168,12 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                tab.view.setBackground(gradientBackground(color));
+                tab.view.setBackground(ThemeColors.gradientBackgroundBottom(context));
             }
         });
 
         tabLayout.setSelectedTabIndicatorColor(gradientColor(color,0.2f));
     }
-
-    //region gradientColor
-    private GradientDrawable gradientBackground(int color) {
-        GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.BOTTOM_TOP,
-                new int[] {gradientColor(color,1f), gradientColor(color,0.8f)});
-        gd.setCornerRadius(0f);
-
-        return gd;
-    }
-
-    private int gradientColor(int color, float factor) {
-
-        int a = Color.alpha(color);
-        int r = Math.round(Color.red(color) * factor);
-        int g = Math.round(Color.green(color) * factor);
-        int b = Math.round(Color.blue(color) * factor);
-
-
-        return Color.argb(a,
-                Math.min(r,255),
-                Math.min(g,255),
-                Math.min(b,255));
-    }
-    //endregion
-
 
     @Override
     public void onAttach(@NonNull Context context) {

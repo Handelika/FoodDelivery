@@ -1,24 +1,14 @@
 package com.handelika.fooddelivery;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -26,16 +16,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.handelika.fooddelivery.callClass.ThemeColors;
 import com.handelika.fooddelivery.ui.CartFragment;
 import com.handelika.fooddelivery.ui.MenuFragment;
 import com.handelika.fooddelivery.ui.ProfileFragment;
-
-import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -44,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private Fragment selectedFragment;
 
-    private int color;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +60,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
         //theme customization
-        color = Color.parseColor( getShareDefaults("themeColor", getApplicationContext()));
-        customizeTheme(color);
+        customizeTheme();
     }
 
-    private void customizeTheme(int color) {
+    private void customizeTheme() {
 
         //Defining ColorStateList for menu item Text
         ColorStateList navMenuTextList = new ColorStateList(
@@ -90,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         new int[]{android.R.attr.state_pressed}
                 },
                 new int[] {
-                        gradientColor(color, 0.8f),
-                        gradientColor(color, 1f),
+                        ThemeColors.gradientColor(ThemeColors.getThemeColor(getApplicationContext()), 0.8f),
+                        ThemeColors.gradientColor(ThemeColors.getThemeColor(getApplicationContext()), 1f),
                         Color.WHITE,
                         Color.WHITE,
                         Color.WHITE,
@@ -107,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         new int[]{android.R.attr.state_pressed}
                 },
                 new int[] {
-                        gradientColor(color, 0.8f),
-                        gradientColor(color, 1f),
+                        ThemeColors.gradientColor(ThemeColors.getThemeColor(getApplicationContext()), 0.8f),
+                        ThemeColors.gradientColor(ThemeColors.getThemeColor(getApplicationContext()), 1f),
                         Color.WHITE,
                         Color.WHITE,
                         Color.WHITE,
@@ -134,42 +119,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //window.setStatusBarColor(gradientColor(R.color.colorBlackBoard, 0.2f));
 
     }
-
-    //region gradientColor
-    private GradientDrawable gradientBackgroundTop(int color) {
-        GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.BOTTOM_TOP,
-                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
-        gd.setCornerRadius(0f);
-
-        return gd;
-    }
-
-    private GradientDrawable gradientBackgroundBottom(int color) {
-        GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
-        gd.setCornerRadius(0f);
-
-        return gd;
-    }
-
-    private int gradientColor(int color, float factor) {
-
-        int a = Color.alpha(color);
-        int r = Math.round(Color.red(color) * factor);
-        int g = Math.round(Color.green(color) * factor);
-        int b = Math.round(Color.blue(color) * factor);
-
-
-        return Color.argb(a,
-                Math.min(r,255),
-                Math.min(g,255),
-                Math.min(b,255));
-    }
-    //endregion
-
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -211,4 +160,35 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragmentTransaction.commit();
     }
     //endregion
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (count==2) {
+
+            count=0;
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("Çıkış");
+            dialog.setCancelable(true);
+            dialog.setMessage("Uygulamadan çıkmak istediğinize emin misiniz?");
+            dialog.setNegativeButton("Hayır", null);
+            dialog.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    count = 0;
+                    finishAffinity();
+                    System.exit(0);
+                }
+            });
+            AlertDialog alertDialog = dialog.create();
+            alertDialog.show();
+
+        }else{
+            count++;
+        }
+
+    }
 }

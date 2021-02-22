@@ -22,10 +22,10 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvLogo"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="50dp"
+                android:layout_margin="25dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="1dp">
 
@@ -65,11 +65,12 @@
                 app:cardCornerRadius="10dp">
 
                 <EditText
+                    android:id="@+id/txtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
-                    android:maxLines="1"
+                    android:lines="1"
                     android:hint="Kullanıcı Adı"
                     android:inputType="textEmailAddress"
                     android:focusable="true"
@@ -95,6 +96,7 @@
                     android:gravity="center"
                     android:focusable="true"
                     android:inputType="textPassword"
+                    android:lines="1"
                     android:nextFocusDown="@id/txtPassVerify"
                     android:hint="Parola"
                     android:padding="3dp" />
@@ -117,6 +119,7 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:focusable="true"
+                    android:lines="1"
                     android:inputType="textPassword"
                     android:nextFocusDown="@id/btnLogin"
                     android:hint="Parola Tekrar"
@@ -127,9 +130,10 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="btnRegisterClick"
                 android:layout_below="@id/cvPassVerify"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="25dp"
@@ -144,7 +148,7 @@
                 android:id="@+id/txtLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnLogin"
+                android:layout_below="@id/btnRegister"
                 android:padding="15dp"
                 android:onClick="txtLoginClick"
                 android:text="@string/textAlreadyRegistered"

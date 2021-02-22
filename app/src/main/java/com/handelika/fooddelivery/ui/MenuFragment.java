@@ -7,12 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +14,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
@@ -34,11 +33,10 @@ import com.handelika.fooddelivery.Adapter.MenuAdapter;
 import com.handelika.fooddelivery.Adapter.SliderAdapter;
 import com.handelika.fooddelivery.Models.Menu;
 import com.handelika.fooddelivery.R;
+import com.handelika.fooddelivery.callClass.ThemeColors;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,7 +65,7 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
 
     private ColorStateList checkColorStateList;
 
-    private TextView txtStickyMenuHeader;
+    private TextView txtStickyMenuHeader, txtExtractedIngredients, txtSelectedMeatBall,txtSelectedCheddar, txtSelectedDrink;
 
     private Fragment selectedFragment;
 
@@ -77,7 +75,14 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
 
     private RelativeLayout rlMenuDetail, relativeExtractedSupplies, relativeMeatballSelection,relativeCheddarSelection, relativeDrinkSelection;
 
-    private  int color ;
+    private int color;
+    private int count =0;//çıkarılacak malzeme kısmı
+    private int quantity =0;//adet sayısı
+    private double price = 0.00;//adet ile artan ücret
+
+    private String selectedMeatBallPicker = "";
+    private String selectedCheddarPicker = "";
+    private String selectedDrinkPicker = "";
 
     public MenuFragment() {
         // Required empty public constructor
@@ -119,6 +124,8 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
         view = inflater.inflate(R.layout.fragment_menu, container, false);
         context = getContext();
 
+        customizeTheme();
+
         imgCart = view.findViewById(R.id.imgCart);
         imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,35 +145,37 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
         cvProductHeader = view.findViewById(R.id.cvProductHeader);
         rvMenu = view.findViewById(R.id.rvMenu);
         txtStickyMenuHeader = view.findViewById(R.id.txtStickyMenuHeader);
+
         navView = getActivity().findViewById(R.id.nav_view);
         navView.setVisibility(View.VISIBLE);
 
-        menuList.add(new Menu(1,"Klasik Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "18.95₺", "hamburger"));
 
-        menuList.add(new Menu(2,"Cheese Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "18.95₺", "hamburger"));
+        menuList.add(new Menu(1,"Klasik Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "18.95", "hamburger"));
 
-        menuList.add(new Menu(3,"Gurme Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "18.95₺", "hamburger"));
+        menuList.add(new Menu(2,"Cheese Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "18.95", "hamburger"));
 
-        menuList.add(new Menu(4,"Tavuk Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "34.95₺", "hamburger"));
+        menuList.add(new Menu(3,"Gurme Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "18.95", "hamburger"));
 
-        menuList.add(new Menu(5,"Tavuk Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "34.95₺", "hamburger"));
+        menuList.add(new Menu(4,"Tavuk Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "34.95", "hamburger"));
 
-        menuList.add(new Menu(6,"Tavuk Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "34.95₺", "hamburger"));
+        menuList.add(new Menu(5,"Tavuk Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "34.95", "hamburger"));
+
+        menuList.add(new Menu(6,"Tavuk Burger","Hamburger sosu, cheddar peyniri, göbek marul, domates, ketçap,mayonez", "34.95", "hamburger"));
 
 
         runAnimationMenu(rvMenu,menuList,0);
 
-        color = Color.parseColor( getShareDefaults("themeColor", context));
-        customizeTheme(color);
+
 
 
 
         return view;
     }
 
-    private void customizeTheme(int color) {
-
+    private void customizeTheme() {
         //cvProductHeader.setCardBackgroundColor(color);
+
+        color = ThemeColors.getThemeColor(context);
 
         checkColorStateList = new ColorStateList(
                 new int[][]{
@@ -220,13 +229,25 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
     private void getMenuDetails(Menu menu) {
 
         ImageView imgMenu = view.findViewById(R.id.imgMenu);
+        ImageView imgMinus = view.findViewById(R.id.imgMinus);
+        ImageView imgAdd = view.findViewById(R.id.imgAdd);
         ImageView imgClose = view.findViewById(R.id.imgClose);
         TextView txtMenuHeader = view.findViewById(R.id.txtMenuHeader);
         TextView txtMenuDetail = view.findViewById(R.id.txtMenuDetail);
         TextView txtPrice = view.findViewById(R.id.txtPrice);
+        TextView txtTotal = view.findViewById(R.id.txtTotal);
+        txtSelectedMeatBall = view.findViewById(R.id.txtSelectedMeatBall);
+        txtSelectedCheddar = view.findViewById(R.id.txtSelectedCheddar);
+        txtSelectedDrink = view.findViewById(R.id.txtSelectedDrink);
+
+        txtExtractedIngredients = view.findViewById(R.id.txtExtractedIngredients);
         MaterialButton btnAddToCart = view.findViewById(R.id.btnAddToCart);
 
-        LinearLayout linearMenuDetail = view.findViewById(R.id.linearMenuDetail);
+        //Cardviews
+        MaterialCardView cvExtracted = view.findViewById(R.id.cvExtracted);
+        MaterialCardView cvMeatballSelection = view.findViewById(R.id.cvMeatballSelection);
+        MaterialCardView cvExtraCheddar = view.findViewById(R.id.cvExtraCheddar);
+        MaterialCardView cvDrinkSelection = view.findViewById(R.id.cvDrinkSelection);
 
         //headers
         TextView txtExtractHeader = view.findViewById(R.id.txtExtractHeader);
@@ -261,17 +282,18 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
         rlMenuDetail.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.bottom_to_top));
 
 
-
+        //menuImage part
         String uri = "@drawable/" + menu.getMenuImgUrl();
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
         @SuppressLint("UseCompatLoadingForDrawables") Drawable res = context.getResources().getDrawable(imageResource);
         imgMenu.setImageDrawable(res);
 
+        //menuHeader
         txtMenuHeader.setText(menu.getMenu());
         txtMenuDetail.setText(menu.getMenuDetail());
         txtPrice.setText(menu.getMenuPrice());
 
-
+        //closing menu detail button
         @SuppressLint("UseCompatLoadingForDrawables") Drawable closeDrawable = context.getResources().getDrawable(R.drawable.ic_baseline_close_24);
         closeDrawable.setTint(color);
         imgClose.setImageDrawable(closeDrawable);
@@ -284,32 +306,62 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
             }
         });
 
-        txtExtractHeader.setOnClickListener(new View.OnClickListener() {
+        cvExtracted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 extractedSupplies();
             }
         });
 
-        txtMeatballHeader.setOnClickListener(new View.OnClickListener() {
+        cvMeatballSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 meetBallSelection();
             }
         });
 
-        txtCheddarHeader.setOnClickListener(new View.OnClickListener() {
+        cvExtraCheddar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cheddarSelectin();
             }
         });
 
-        txtDrinkHeader.setOnClickListener(new View.OnClickListener() {
+        cvDrinkSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 drinkSelection();
+            }
+        });
+
+        imgAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quantity++;
+                txtTotal.setText(quantity+"");
+                price= price + Double.parseDouble( menu.getMenuPrice());
+                txtPrice.setText(price +"₺");
+
+            }
+        });
+
+        imgMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (quantity>0) {
+                    quantity--;
+                    txtTotal.setText(quantity + "");
+                    price = price - Double.parseDouble( menu.getMenuPrice());
+                    txtPrice.setText(price +"₺");
+                }else{
+                    txtTotal.setText(quantity+"");
+                    price = Double.parseDouble( menu.getMenuPrice());
+                    txtPrice.setText(price +"₺");
+
+                }
+
             }
         });
 
@@ -337,6 +389,11 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
         txtOkDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int picked = pickerDrink.getValue();
+                selectedDrinkPicker = data[picked];
+                txtSelectedDrink.setText(selectedDrinkPicker);
+
                 relativeDrinkSelection.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fragment_fade_exit));
                 relativeDrinkSelection.setVisibility(View.GONE);
             }
@@ -365,6 +422,11 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
         txtOkCheddar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int picked = pickerCheddar.getValue();
+                selectedCheddarPicker = data[picked];
+                txtSelectedCheddar.setText(selectedCheddarPicker);
+
                 relativeCheddarSelection.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fragment_fade_exit));
                 relativeCheddarSelection.setVisibility(View.GONE);
             }
@@ -393,6 +455,79 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
         checkBarbequeExtract.setButtonTintList(checkColorStateList);
         checkOnionRingsExtract.setButtonTintList(checkColorStateList);
         txtOk.setTextColor(color);
+
+
+
+        checkKetchupExtract.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    count++;
+                    txtExtractedIngredients.setText(count + " Malzeme");
+                }else{
+                    count--;
+                    txtExtractedIngredients.setText(count+ " Malzeme");
+
+                }
+            }
+        });
+
+        checkMayonieseExtract.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    count++;
+                    txtExtractedIngredients.setText(count + " Malzeme");
+                }else{
+                    count--;
+                    txtExtractedIngredients.setText(count+ " Malzeme");
+
+                }
+            }
+        });
+
+        checkLettuceExtract.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    count++;
+                    txtExtractedIngredients.setText(count + " Malzeme");
+                }else{
+                    count--;
+                    txtExtractedIngredients.setText(count+ " Malzeme");
+
+                }
+            }
+        });
+
+        checkBarbequeExtract.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    count++;
+                    txtExtractedIngredients.setText(count + " Malzeme");
+                }else{
+                    count--;
+                    txtExtractedIngredients.setText(count+ " Malzeme");
+
+                }
+            }
+        });
+
+        checkOnionRingsExtract.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    count++;
+                    txtExtractedIngredients.setText(count + " Malzeme");
+                }else{
+                    count--;
+                    txtExtractedIngredients.setText(count+ " Malzeme");
+
+                }
+            }
+        });
+
 
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -423,9 +558,15 @@ public class MenuFragment extends Fragment implements SliderAdapter.SliderOnClic
             pickerMeetball.setTextColor(color);
         }
 
+
         txtOkMeetBall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int pickerNum = pickerMeetball.getValue();
+                selectedMeatBallPicker = data[pickerNum];
+                txtSelectedMeatBall.setText(selectedMeatBallPicker);
+
                 relativeMeatballSelection.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fragment_fade_exit));
                 relativeMeatballSelection.setVisibility(View.GONE);
             }

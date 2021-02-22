@@ -1,16 +1,7 @@
 package com.handelika.fooddelivery.ui;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +9,22 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
-import com.google.android.material.badge.BadgeDrawable;
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.handelika.fooddelivery.Adapter.CartItemsAdapter;
-import com.handelika.fooddelivery.Adapter.UserAddressAdapter;
 import com.handelika.fooddelivery.Models.CartItems;
-import com.handelika.fooddelivery.Models.UserAddress;
 import com.handelika.fooddelivery.R;
-
-import org.w3c.dom.Text;
+import com.handelika.fooddelivery.callClass.ThemeColors;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,8 +47,6 @@ public class CartFragment extends Fragment implements CartItemsAdapter.CartItems
     private RecyclerView rvCartItems;
     private CartItemsAdapter cartItemsAdapter;
     private List<CartItems> cartItemsList = new ArrayList<>();
-
-    private int color;
 
     BottomNavigationView navView;
 
@@ -104,7 +94,6 @@ public class CartFragment extends Fragment implements CartItemsAdapter.CartItems
         View view =  inflater.inflate(R.layout.fragment_cart, container, false);
 
         context = getContext();
-        color= Color.parseColor( getShareDefaults("themeColor", context));;
 
         txtClose = view.findViewById(R.id.txtClose);
         btnFinishOrder = view.findViewById(R.id.btnFinishOrder);
@@ -132,13 +121,25 @@ public class CartFragment extends Fragment implements CartItemsAdapter.CartItems
             }
         });
 
-
         runAnimation(rvCartItems,cartItemsList,0);
+
+        //fixing back button to return profile fragment
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navView.setVisibility(View.VISIBLE);
+
+                selectedFragment = new MenuFragment();
+                goToFragment(selectedFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return view;
     }
 
     private void customizeTheme() {
+        int color = ThemeColors.getThemeColor(context);
         txtClose.setTextColor(color);
         btnFinishOrder.setBackgroundColor(color);
     }

@@ -1,46 +1,54 @@
 package com.handelika.fooddelivery.callClass;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
+import android.graphics.drawable.GradientDrawable;
 
-import androidx.annotation.ColorInt;
-
-import com.handelika.fooddelivery.R;
+import static com.handelika.fooddelivery.callClass.SharePrefCall.getShareDefaults;
 
 public class ThemeColors {
-   private static final String NAME = "ThemeColors", KEY = "color";
 
-   @ColorInt
-   private int color;
+    public static int getThemeColor(Context context){
+        return Color.parseColor( getShareDefaults("themeColor", context));
+    }
 
-   ThemeColors(Context context) {
-       SharedPreferences sharedPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-       String stringColor = sharedPreferences.getString(KEY, "004bff");
-       color = Color.parseColor("#" + stringColor);
+    public static GradientDrawable gradientBackgroundTop(Context context) {
 
-       if (isLightActionBar()) context.setTheme(R.style.Theme_FoodDelivery);
-       context.setTheme(context.getResources().getIdentifier("T_" + stringColor, "style", context.getPackageName()));
-   }
+        int color = getThemeColor(context);
 
-   public static void setNewThemeColor(Activity activity, int red, int green, int blue) {
-       red = Math.round(red / 15.0f) * 15;
-       green = Math.round(green / 15.0f) * 15;
-       blue = Math.round(blue / 15.0f) * 15;
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.BOTTOM_TOP,
+                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
+        gd.setCornerRadius(0f);
 
-       String stringColor = Integer.toHexString(Color.rgb(red, green, blue)).substring(2);
-       SharedPreferences.Editor editor = activity.getSharedPreferences(NAME, Context.MODE_PRIVATE).edit();
-       editor.putString(KEY, stringColor);
-       editor.apply();
+        return gd;
+    }
 
-       activity.recreate();
-   }
+    public static GradientDrawable gradientBackgroundBottom(Context context) {
 
-   private boolean isLightActionBar() {// Checking if title text color will be black
-       int rgb = (Color.red(color) + Color.green(color) + Color.blue(color)) / 3;
-       return rgb > 210;
-   }
+        int color = getThemeColor(context);
+
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
+        gd.setCornerRadius(0f);
+
+        return gd;
+    }
+
+    public static int gradientColor(int color, float factor) {
+
+        int a = Color.alpha(color);
+        int r = Math.round(Color.red(color) * factor);
+        int g = Math.round(Color.green(color) * factor);
+        int b = Math.round(Color.blue(color) * factor);
+
+
+        return Color.argb(a,
+                Math.min(r,255),
+                Math.min(g,255),
+                Math.min(b,255));
+    }
+
+
 }
