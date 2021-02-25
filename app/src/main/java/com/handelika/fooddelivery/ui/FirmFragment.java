@@ -1,18 +1,18 @@
 package com.handelika.fooddelivery.ui;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -20,6 +20,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.handelika.fooddelivery.Adapter.SliderAdapter;
 import com.handelika.fooddelivery.Models.Slider;
 import com.handelika.fooddelivery.R;
+import com.handelika.fooddelivery.callClass.ExpandableTextView;
 import com.handelika.fooddelivery.callClass.ThemeColors;
 
 import java.util.ArrayList;
@@ -44,8 +45,11 @@ public class FirmFragment extends Fragment implements SliderAdapter.SliderOnClic
     private MaterialToolbar firmToolbar;
 
     private Context context;
+    private LinearLayout linearFirm;
 
     private AppBarLayout appBarLayout;
+
+    private LinearLayout linearFirmInfo;
 
     private RecyclerView rvImgGallery;
     private SliderAdapter sliderAdapter;
@@ -92,14 +96,34 @@ public class FirmFragment extends Fragment implements SliderAdapter.SliderOnClic
         context = getContext();
         firmToolbar = view.findViewById(R.id.firmToolbar);
         rvImgGallery = view.findViewById(R.id.rvImgGallery);
+        linearFirm = view.findViewById(R.id.linearFirm);
+        linearFirmInfo = view.findViewById(R.id.linearFirmInfo);
+
+        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus, quam eu commodo venenatis, arcu mauris efficitur lorem, non egestas urna nisi quis mauris. Vestibulum imperdiet, libero ut ullamcorper faucibus, dolor dui venenatis lorem, a malesuada arcu nulla non arcu.";
+
+        ExpandableTextView expandableTextView = new ExpandableTextView(context);
+        expandableTextView.setText(text);
+        expandableTextView.setEllipsize(TextUtils.TruncateAt.END);
+        expandableTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layoutParams.setMargins(15,5,15,5);
+
+       linearFirmInfo.addView(expandableTextView);
 
 
         customizeTheme();
 
-        sliderList.add(new Slider(1,"","duyuru",""));
-        sliderList.add(new Slider(2,"","migros",""));
+        sliderList.add(new Slider(1,"","hamburger",""));
+        sliderList.add(new Slider(2,"","hamburger",""));
+        sliderList.add(new Slider(3,"","hamburger",""));
+        sliderList.add(new Slider(4,"","hamburger",""));
+        sliderList.add(new Slider(5,"","hamburger",""));
+        sliderList.add(new Slider(6,"","hamburger",""));
+        sliderList.add(new Slider(7,"","hamburger",""));
 
         runAnimationMenu(rvImgGallery,sliderList,0);
+
 
         return view;
     }
@@ -112,9 +136,9 @@ public class FirmFragment extends Fragment implements SliderAdapter.SliderOnClic
         if (type == 0) {
             controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down);
 
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-            linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-            rvList.setLayoutManager(linearLayoutManager);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2,RecyclerView.VERTICAL,false);
+
+            rvList.setLayoutManager(gridLayoutManager);
             rvList.hasFixedSize();
 
 
@@ -130,43 +154,10 @@ public class FirmFragment extends Fragment implements SliderAdapter.SliderOnClic
     private void customizeTheme() {
         int color = ThemeColors.getThemeColor(context);
 
-        firmToolbar.setBackground(gradientBackgroundTop(color));
-//        firmToolbar.setBackground(getResources().getDrawable(R.drawable.food));
+        linearFirm.setBackground(getResources().getDrawable(R.drawable.background1));
+//        linearFirm.setBackground(ThemeColors.gradientBackgroundTop(context));
+
     }
-
-    //region gradientColor
-    private GradientDrawable gradientBackgroundTop(int color) {
-        GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.BOTTOM_TOP,
-                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
-        gd.setCornerRadius(0f);
-
-        return gd;
-    }
-
-    private GradientDrawable gradientBackgroundBottom(int color) {
-        GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[] {gradientColor(color,1f), gradientColor(color,0.8f),gradientColor(color,0.6f)});
-        gd.setCornerRadius(0f);
-
-        return gd;
-    }
-
-    private int gradientColor(int color, float factor) {
-
-        int a = Color.alpha(color);
-        int r = Math.round(Color.red(color) * factor);
-        int g = Math.round(Color.green(color) * factor);
-        int b = Math.round(Color.blue(color) * factor);
-
-
-        return Color.argb(a,
-                Math.min(r,255),
-                Math.min(g,255),
-                Math.min(b,255));
-    }
-    //endregion
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -178,4 +169,7 @@ public class FirmFragment extends Fragment implements SliderAdapter.SliderOnClic
     public void sliderBtnOnClick(int index) {
 
     }
+
+
+
 }

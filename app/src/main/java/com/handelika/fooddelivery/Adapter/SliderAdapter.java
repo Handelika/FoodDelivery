@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.handelika.fooddelivery.Models.Slider;
 import com.handelika.fooddelivery.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -48,8 +46,6 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderAdap
 
         Slider slider = sliderList.get(position);
 
-        //holder.txtHeader.setText(slider.getHeader());
-
         String uri = "@drawable/" + slider.getImgUrl();
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
         @SuppressLint("UseCompatLoadingForDrawables") Drawable res = context.getResources().getDrawable(imageResource);
@@ -65,13 +61,11 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderAdap
     public class SliderAdapterViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgUrl;
-        private TextView txtHeader;
 
         public SliderAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgUrl = itemView.findViewById(R.id.imgUrl);
-            txtHeader = itemView.findViewById(R.id.txtHeader);
 
         }
     }

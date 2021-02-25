@@ -18,7 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         setShareDefaults("themeColor", colorStr, getApplicationContext());
 
-        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
 
     }
 }

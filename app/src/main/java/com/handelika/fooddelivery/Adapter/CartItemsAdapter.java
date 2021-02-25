@@ -11,13 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.handelika.fooddelivery.Models.CartItems;
 import com.handelika.fooddelivery.R;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 public class CartItemsAdapter extends RecyclerView.Adapter<CartItemsAdapter.CartItemsAdapterViewHolder> {
@@ -65,7 +63,8 @@ public class CartItemsAdapter extends RecyclerView.Adapter<CartItemsAdapter.Cart
 
         String uri = "@drawable/" + cartItems.getCartImagUrl();
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable res = context.getResources().getDrawable(imageResource);
+        @SuppressLint("UseCompatLoadingForDrawables")
+        Drawable res = context.getResources().getDrawable(imageResource);
         holder.imgCartItem.setBackground(res);
 
     }
